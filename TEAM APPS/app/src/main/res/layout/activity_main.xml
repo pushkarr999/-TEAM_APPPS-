@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <EditText
+        android:id="@+id/Adhaar_Edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter Adhaar or Mobile Number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/VID_Edittext" />
+
+    <EditText
+        android:id="@+id/VID_Edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter VID (Reccomended)"
+        app:layout_constraintBottom_toTopOf="@id/Button_GetOTP"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Adhaar_Edittext" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="*Enter either VID or VID or Both"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/Adhaar_Edittext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="20dp"/>
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Adhaar_Edittext"
+        app:layout_constraintBottom_toTopOf="@id/Captcha_Edittext"
+        app:layout_constraintWidth_min="350dp"
+        tools:src="@drawable/img"
+        android:visibility="gone"/>
+
+    <EditText
+        android:id="@+id/Captcha_Edittext"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:tooltipText="Enter Captcha"
+        android:hint="Enter Captch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintBottom_toTopOf="@+id/Button_GetOTP"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/Button_GetOTP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GET OTP"
+        app:layout_constraintBottom_toTopOf="@id/OTP_Edittext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/VID_Edittext" />
+
+    <TextView
+        android:id="@+id/Text_OR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OR"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/VID_Edittext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Adhaar_Edittext" />
+
+    <EditText
+        android:id="@+id/OTP_Edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter OTP recivied"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Button_GetOTP"
+        app:layout_constraintBottom_toTopOf="@id/Button_Login"/>
+    <Button
+        android:id="@+id/Button_Login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/OTP_Edittext"
+        android:text="LOGIN"
+        android:visibility="gone"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Continue As Guest -->"
+        android:textSize="12sp"
+        android:backgroundTint="#FF0000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="10dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Uses_Info">
+
+    <TextView
+        android:id="@+id/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:text="Enter User Details"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/editText_VID"
+        android:textSize="24sp"
+        />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="of address sharer"
+        app:layout_constraintEnd_toEndOf="@id/Title"
+        app:layout_constraintStart_toStartOf="@id/Title"
+        app:layout_constraintTop_toBottomOf="@id/Title"
+        />
+
+    <EditText
+        android:id="@+id/editText_VID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter VID/UID of User"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@id/editText_Mobile"/>
+
+    <EditText
+        android:id="@+id/editText_Mobile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Mobile Number of User"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_VID"
+        app:layout_constraintBottom_toTopOf="@id/button_Notify_User"/>
+
+    <Button
+        android:id="@+id/button_Notify_User"
+        android:text="Notify User"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_Mobile" />
+</androidx.constraintlayout.widget.ConstraintLayout>

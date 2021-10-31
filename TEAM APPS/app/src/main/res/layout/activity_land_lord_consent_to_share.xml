@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LandLord_Consent_To_Share">
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/Edittext_Address"
+        android:hint="Enter The OTP"
+        app:layout_constraintBottom_toTopOf="@id/Update"
+        />
+    <CheckBox
+        android:id="@+id/checkbox_Consent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="@id/Edittext_Address"
+        app:layout_constraintTop_toBottomOf="@id/Edittext_Address"
+        app:layout_constraintEnd_toStartOf="@id/Consent_Text"
+
+        />
+
+    <TextView
+        android:id="@+id/Consent_Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="I declare to share address\n to requesting\nuser with consent "
+        app:layout_constraintStart_toEndOf="@id/checkbox_Consent"
+        app:layout_constraintTop_toBottomOf="@id/Edittext_Address" />
+    <Button
+        android:id="@+id/Update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_Consent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Share --> "/>
+</androidx.constraintlayout.widget.ConstraintLayout>

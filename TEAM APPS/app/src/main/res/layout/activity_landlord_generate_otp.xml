@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Lanlord_otp_generation">
+
+    <TextView
+        android:id="@+id/Info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="You Have Received \nan Address Sharing Request From \nUser"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@id/AdhaarEdit"
+        />
+
+    <EditText
+        android:layout_marginTop="20dp"
+        android:id="@+id/AdhaarEdit"
+        android:hint="Enter Your Adhaar Number/VID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Info"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"/>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/AdhaarEdit"
+        app:layout_constraintBottom_toTopOf="@id/Captcha_Edittext"
+        tools:minHeight="300dp"
+        tools:minWidth="300dp"
+        tools:src="@drawable/img"
+        android:visibility="gone"/>
+
+    <EditText
+        android:id="@+id/Captcha_Edittext"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:tooltipText="Enter Captcha"
+        android:hint="Enter Captch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintBottom_toTopOf="@+id/Button_GetOTP"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/Button_GetOTP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Captcha_Edittext"
+        app:layout_constraintBottom_toTopOf="@id/OTP_Edittext"
+        android:text="GET OTP" />
+
+    <EditText
+        android:id="@+id/OTP_Edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter OTP recivied"
+        app:layout_constraintTop_toBottomOf="@id/Button_GetOTP"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/Button_Login"
+        android:visibility="gone"/>
+    <Button
+        android:id="@+id/Button_Login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/OTP_Edittext"
+        android:text="LOGIN"
+        android:visibility="gone"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
