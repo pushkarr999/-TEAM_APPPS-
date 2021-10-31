@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        />
+    <EditText
+        android:id="@+id/text_display"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_below="@+id/image_view"
+        android:textSize="26dp"
+        android:maxLines="7"
+        android:layout_margin="10dp"
+        />
+    <Button
+        android:id="@+id/capture_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Capture Image"
+        android:layout_above="@+id/detect_text_image"
+        android:background="@color/purple_700"
+        android:textColor="@android:color/white"
+        android:textSize="17dp"
+        android:layout_marginBottom="10dp"
+        />
+    <Button
+        android:id="@+id/detect_text_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Detect Text"
+        android:layout_above="@+id/submit"
+        android:layout_marginBottom="10dp"
+        android:background="@color/purple_700"
+        android:textColor="@android:color/white"
+        android:textSize="17dp"/>
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:layout_alignParentBottom="true"
+        android:text="Submit"
+        android:background="@color/purple_700"
+        android:layout_marginBottom="10dp"
+        android:textSize="17dp" />
+</RelativeLayout>
