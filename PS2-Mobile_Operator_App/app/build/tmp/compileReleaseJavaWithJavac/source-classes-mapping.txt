@@ -1,0 +1,10 @@
+com/example/textrecognition/MainActivity.java
+ com.example.textrecognition.MainActivity
+ com.example.textrecognition.MainActivity$1
+ com.example.textrecognition.MainActivity$2
+ com.example.textrecognition.MainActivity$3
+ com.example.textrecognition.MainActivity$4
+ com.example.textrecognition.MainActivity$5
+ com.example.textrecognition.MainActivity$6
+com/example/textrecognition/BuildConfig.java
+ com.example.textrecognition.BuildConfig
