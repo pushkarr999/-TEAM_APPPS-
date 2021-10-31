@@ -1,12 +1,16 @@
 package uidai.hackathon.Address;
 
 import static android.content.ContentValues.TAG;
+import static uidai.hackathon.Address.CONST_Variables.LOGTAG;
 import static uidai.hackathon.Address.CONST_Variables.database;
 import static uidai.hackathon.Address.CONST_Variables.UserByVID;
 import static uidai.hackathon.Address.CONST_Variables.UsersDr;
 import static uidai.hackathon.Address.CONST_Variables.UserByMobile;
 import static uidai.hackathon.Address.CONST_Variables.UserByUID;
 import static uidai.hackathon.Address.CONST_Variables.FbToken;
+import static uidai.hackathon.Address.CONST_Variables.uidNumber;
+import static uidai.hackathon.Address.CONST_Variables.vidNumber;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,22 +26,18 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.iid.FirebaseInstanceIdReceiver;
-import com.google.firebase.iid.internal.FirebaseInstanceIdInternal;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class Function_Select extends AppCompatActivity {
     private FirebaseAuth mAuth;
 Intent login;
 TextView UserName_text;
-Button button_updateAddress,button_adUpDoc,button_adUpUser;
-Intent UserNotify,DocumentUpload;
+Button button_updateAddress,button_adUpUser;
+Intent UserNotify;
 String UID,VID;
 
     @Override
@@ -45,36 +45,35 @@ String UID,VID;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_function_select);
         initialiseUI();
-// Initialize Firebase Auth
+        Log.d(LOGTAG,"Initialised UI elements");
+
         mAuth = FirebaseAuth.getInstance();
       database = FirebaseDatabase.getInstance();
         login = getIntent();
         saveData();
         getTkn();
+        Log.d(LOGTAG,"Got Token of User");
         UsersDr = database.getReference("USERS");
-        InitialiseOnDataChangeUSers();
+        InitialiseOnDataChangeUsers();
+        Log.d(LOGTAG,"Got Instances of Realtime Cloud Databases");
         button_updateAddress.setOnClickListener(v -> {
-            button_adUpDoc.setVisibility(View.VISIBLE);
             button_adUpUser.setVisibility(View.VISIBLE);
             button_updateAddress.setVisibility(View.GONE);
         });
         button_adUpUser.setOnClickListener(v -> {
             UserNotify = new Intent(Function_Select.this,Uses_Info.class);
             startActivity(UserNotify); });
-        //Code to DOne
-        button_adUpDoc.setOnClickListener(v -> {
-         //code to be done
-        });
+
         mAuth.signInAnonymously()
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInAnonymously:success");
+                            Log.d(LOGTAG, "signInAnonymously:success");
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInAnonymously:failure", task.getException());
+                            Log.d(LOGTAG, "signInAnonymously:failure", task.getException());
                             Toast.makeText(Function_Select.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
@@ -102,7 +101,7 @@ String UID,VID;
                 });
     }
 
-    void InitialiseOnDataChangeUSers(){
+    void InitialiseOnDataChangeUsers(){
     UsersDr.addValueEventListener(new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -125,10 +124,11 @@ String UID,VID;
         if(UID!=null)
             if(UID.length()==12){
         UsersDr.child("BYUID").child(UID).setValue(FbToken);
-    Log.e("Rest","Updated UID on CLoud as "+ FbToken);}
+                Log.d(LOGTAG,"Updated token for User UID "+uidNumber+" as "+FbToken);}
         if(VID!=null)
-        if(VID.length()==16)
+        if(VID.length()==16){
         UsersDr.child("BYVID").child(VID).setValue(FbToken);
+            Log.d(LOGTAG,"Updated token for User VID "+vidNumber+" as "+FbToken);}
 
     }
 
@@ -149,20 +149,16 @@ String UID,VID;
 
         }    }
 
-
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
+        Log.d(LOGTAG,"OnStart Called for generating Token");
         getTkn();
     }
-
-
 
     private void initialiseUI() {
     UserName_text = findViewById(R.id.Text_UserName);
     button_updateAddress = findViewById(R.id.Button_Address_Update);
-    button_adUpDoc = findViewById(R.id.Button_Verify_Using_Document);
     button_adUpUser = findViewById(R.id.Button_Verify_Using_Another_User);
     }
 }

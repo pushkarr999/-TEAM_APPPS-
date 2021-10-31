@@ -1,5 +1,7 @@
 package uidai.hackathon.Address;
 
+import static uidai.hackathon.Address.CONST_Variables.FbToken;
+import static uidai.hackathon.Address.CONST_Variables.LOGTAG;
 import static uidai.hackathon.Address.CONST_Variables.URL_OTP;
 import static uidai.hackathon.Address.CONST_Variables.uidNumber;
 import static uidai.hackathon.Address.CONST_Variables.uuid;
@@ -55,12 +57,18 @@ String Ad;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landlord_generate_otp);
         initialiseUI();
+        Log.d(LOGTAG,"initialised UI");
         extractedIntent();
+        Log.d(LOGTAG,"Extracted Information of Sender from Intent Passed");
         checkAndSetTextView();
+        Log.d(LOGTAG,"Set Value of Textview Accordingly");
         disableOrEnableInputViews(checkUIDandVIDexist());
+        Log.d(LOGTAG,"Set Views Visibility According to Data's");
         RequestHTTPOTP();
         uuid = UUID.randomUUID().toString();
+        Log.d(LOGTAG,"Random UUID generated for tokenID");
         getOTP_button.setOnClickListener(v -> {
+            Log.d(LOGTAG,"Get OTP Clicked");
             if(uid_vid.equals("null")){
                 if(adhaar_or_vid.getText().toString().length()==12) {
                     uidNumber = Long.parseLong(adhaar_or_vid.getText().toString());
@@ -119,6 +127,7 @@ String Ad;
                 Toast.makeText(getApplicationContext(), "UID and VID not Found", Toast.LENGTH_SHORT).show();
         });
         Submit.setOnClickListener(v -> {
+            Log.d(LOGTAG,"Submit Clicked");
             RequestHTTPKYC();
         });
 
@@ -131,6 +140,8 @@ String Ad;
                 URL_OTP,
                 otp,
                 (Response.Listener<JSONObject>) response ->{
+                    Log.d(LOGTAG,"OTP Requested as : "+otp.toString());
+                    Log.d(LOGTAG,"Got Response as : "+response.toString());
             try{
                     if(response.getString("status").toLowerCase(Locale.ROOT).equals("y")){
                         adhaar_or_vid.setEnabled(false);
@@ -168,6 +179,8 @@ String Ad;
                 URL_OTP,
                 kyc,
                 (Response.Listener<JSONObject>) response ->{
+                    Log.d(LOGTAG,"Sent HTTP Request for EKyc as : "+ kyc.toString());
+                    Log.d(LOGTAG,"Got Response  for EKyc as : "+ response.toString());
                     Document doc = convertStringToXMLDocument(response.toString());
                     NodeList nodes = doc.getElementsByTagName("Uidata");
                     Element element = (Element) nodes;
@@ -258,7 +271,7 @@ String Ad;
         }
         else{
             Toast.makeText(getApplicationContext(),"got an anynomus request",Toast.LENGTH_SHORT);
-            info.setText("We Couldnt Find Data error");
+            info.setText("We Couldn't Find Data error");
         }
     }
 

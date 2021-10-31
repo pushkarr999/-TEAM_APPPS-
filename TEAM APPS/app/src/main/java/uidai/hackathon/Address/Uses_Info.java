@@ -1,6 +1,7 @@
 package uidai.hackathon.Address;
 
 import static android.content.ContentValues.TAG;
+import static uidai.hackathon.Address.CONST_Variables.LOGTAG;
 import static uidai.hackathon.Address.CONST_Variables.Token;
 import static uidai.hackathon.Address.CONST_Variables.Token1;
 import static uidai.hackathon.Address.CONST_Variables.UserByMobile;
@@ -68,14 +69,20 @@ Button send_notif_Button;
 
     private void sendNotifi() {
         if(checkIsUID()){
-        FcmNotificationsSender fcm = new FcmNotificationsSender(Token,"Request for Address Access ","Request Form UID from"+String.valueOf(uidNumber).substring(0,2)+"xxxxxxxxxx",getApplicationContext(),this);
-        fcm.SendNotifications();}
+        FcmNotificationsSender fcm = new FcmNotificationsSender(Token,"Request for Address Access ","Request Form UID : "+String.valueOf(uidNumber).substring(0,2)+"xxxxxxxxxx",getApplicationContext(),this);
+        fcm.SendNotifications();
+            Log.d(LOGTAG,"Sent Notification to user with token  : "+ Token);
+            Log.d(LOGTAG,"Notification "+ "Request for Address Access "+"Request Form UID from"+String.valueOf(uidNumber).substring(0,2)+"xxxxxxxxxx");}
         if(checkIsVID()){
             FcmNotificationsSender fcm = new FcmNotificationsSender(Token,"Request for Address Access ","Request Form vid from"+String.valueOf(vidNumber),getApplicationContext(),this);
-            fcm.SendNotifications();}
+            fcm.SendNotifications();
+            Log.d(LOGTAG,"Sent Notification to user with token  : "+ Token);
+            Log.d(LOGTAG,"Notification "+ "Request for Address Access "+"Request Form VID from"+String.valueOf(vidNumber).substring(0,2)+"xxxxxxxxxxxxx");}
         if(checkIsMobile()){
             FcmNotificationsSender fcm = new FcmNotificationsSender(Token,"Request for Address Access ","Request Form vid from"+String.valueOf(mobile_number),getApplicationContext(),this);
             fcm.SendNotifications();
+            Log.d(LOGTAG,"Sent Notification to user with token  : "+ Token);
+            Log.d(LOGTAG,"Notification "+ "Request for Address Access "+"Request Form Mobile from"+String.valueOf(mobile_number).substring(0,2)+"xxxxxxxx");
         }
     }
 

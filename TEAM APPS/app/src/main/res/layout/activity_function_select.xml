@@ -43,20 +43,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Verify Using Another Users Address"
-        app:layout_constraintBottom_toTopOf="@id/Button_Verify_Using_Document"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Button_Address_Update"
         android:visibility="gone"/>
 
-    <Button
-        android:id="@+id/Button_Verify_Using_Document"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Verify  Through Documnets and Mobile Operator"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Button_Verify_Using_Another_User"
-        android:visibility="gone"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

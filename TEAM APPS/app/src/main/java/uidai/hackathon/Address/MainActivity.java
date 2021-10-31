@@ -1,5 +1,6 @@
 package uidai.hackathon.Address;
 
+import static uidai.hackathon.Address.CONST_Variables.LOGTAG;
 import static uidai.hackathon.Address.CONST_Variables.URL_AUTH;
 import static uidai.hackathon.Address.CONST_Variables.URL_OTP;
 import static uidai.hackathon.Address.CONST_Variables.txnId;
@@ -41,26 +42,25 @@ public class MainActivity extends AppCompatActivity {
     Intent login;
 
 
-//    private static final String URL_CAPTCHA = "https://stage1.uidai.gov.in/unifiedAppAuthService/api/v2/get/captcha";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        captcha=findViewById(R.id.imageView);
         Edittext_Adhaar = findViewById(R.id.Adhaar_Edittext);
         Edittext_VID = findViewById(R.id.VID_Edittext);
-//        Edittext_Captcha = findViewById(R.id.Captcha_Edittext);
         Edittext_OTP = findViewById(R.id.OTP_Edittext);
         Button_getOTP = findViewById(R.id.Button_GetOTP);
         Button_Login = findViewById(R.id.Button_Login);
         Text_OR =findViewById(R.id.Text_OR);
-
+        Log.d(LOGTAG,"OnCreate and UI elements Initialised");
         Button_getOTP.setOnClickListener(v -> {
+            Log.d(LOGTAG,"Get OTP Button Pressed");
             CONST_Variables.uuid = UUID.randomUUID().toString();
+            Log.d(LOGTAG,"UUID Generated as : "+ uuid);
             uidNumber = Long.parseLong(Edittext_Adhaar.getText().toString());
             try {
                 if(!Edittext_Adhaar.getText().toString().isEmpty()&&Edittext_Adhaar.getText().toString().length()==12){
+                    uidNumber = Long.parseLong(Edittext_Adhaar.getText().toString());
                     if(!Edittext_VID.getText().toString().isEmpty()&&Edittext_VID.getText().toString().length()==16){
                         vidNumber = Long.parseLong(Edittext_VID.getText().toString());
                         OtpReqJson = new JSONObject("{\n" +
@@ -68,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
                                 " \"vid\": \""+vidNumber+"\",\n"+
                                 " \"txnId\": \""+uuid+"\"\n" +
                                 "}");
+                        Log.d(LOGTAG,"UID Entered"+ uidNumber);
+                        Log.d(LOGTAG,"VID Entered"+ vidNumber);
                         Edittext_Adhaar.setEnabled(false);
                         Edittext_VID.setEnabled(false);
                     }
@@ -80,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
                         Edittext_VID.setVisibility(View.GONE);
                         Text_OR.setVisibility(View.GONE);
                         Edittext_Adhaar.setEnabled(false);
+                        Log.d(LOGTAG,"UID Entered"+ uidNumber);
                     }
 
                 }
@@ -92,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
                     Edittext_Adhaar.setVisibility(View.GONE);
                         Text_OR.setVisibility(View.GONE);
                     Edittext_VID.setEnabled(false);
+                    Log.d(LOGTAG,"VID Entered"+ vidNumber);
                 }
                 else Toast.makeText(getApplicationContext(), "UID and not Entered  or Not Correctly Entered", Toast.LENGTH_SHORT).show();
 
@@ -100,33 +104,36 @@ public class MainActivity extends AppCompatActivity {
             }
             RequestQueue rQOTP;
             rQOTP = Volley.newRequestQueue(this);
+            Log.d(LOGTAG,"Sending Request for OTP");
             JsonObjectRequest otpReq= new JsonObjectRequest(
                     Request.Method.POST,
                     URL_OTP,
                     OtpReqJson,
                     (Response.Listener<JSONObject>) rspns ->{
+
                         try {
-                            Log.e("Response",rspns.toString());
-
-
+                            Log.d(LOGTAG,"Got Response as : "+rspns.toString());
                             if(rspns.getString("status").toLowerCase(Locale.ROOT).equals("y")){
                                 Edittext_OTP.setVisibility(View.VISIBLE);
                                 Button_Login.setVisibility(View.VISIBLE);
+                                Log.d(LOGTAG,"Response Was Successful");
                             }
                             else if(rspns.getString("errCode").equals("953")){
                                 Toast.makeText(getApplicationContext(), "Wait For A Minute and Send Again", Toast.LENGTH_LONG).show();
                                 Edittext_Adhaar.setEnabled(true);
                                 Edittext_VID.setEnabled(true);
                                 Edittext_Adhaar.setVisibility(View.VISIBLE);
-                        Text_OR.setVisibility(View.VISIBLE);
+                                 Text_OR.setVisibility(View.VISIBLE);
                                 Edittext_VID.setVisibility(View.VISIBLE);
+                                Log.d(LOGTAG,"Response Was not Successful since OTP OverFlood");
                             }
                         else {Toast.makeText(this, "Error:"+rspns.getString("errCode"), Toast.LENGTH_SHORT).show();
                                 Edittext_Adhaar.setEnabled(true);
                                 Edittext_VID.setEnabled(true);
                                 Edittext_Adhaar.setVisibility(View.VISIBLE);
-                        Text_OR.setVisibility(View.VISIBLE);
+                                Text_OR.setVisibility(View.VISIBLE);
                                 Edittext_VID.setVisibility(View.VISIBLE);
+                                Log.d(LOGTAG,"Response Was not Successful");
                         }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -145,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
         Button_Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(LOGTAG,"Login Button Pressed");
                 authReqQue = Volley.newRequestQueue(MainActivity.this);
                 try {
                     if(!Edittext_Adhaar.getText().toString().isEmpty()&&Edittext_Adhaar.getText().toString().length()==12){
@@ -156,27 +164,28 @@ public class MainActivity extends AppCompatActivity {
                                     " \"txnId\": \""+uuid+"\"\n" +
                                     " \"otp\": \""+Edittext_OTP.getText().toString()+"\"\n" +
                                     "}");
-
+                            Log.d(LOGTAG,"Both UID and VID used for Sending");
                         }
                         else{
-                            Toast.makeText(getApplicationContext(), "VID not Entered  or Not Correctly Entered", Toast.LENGTH_SHORT).show();
+
                             authReqJson = new JSONObject("{\n" +
                                     "\"uid\": \""+uidNumber+"\",\n" +
                                     "\"txnId\": \""+uuid+"\",\n" +
                                     "\"otp\": \""+Edittext_OTP.getText().toString()+"\"\n" +
                                     "}");
+                            Log.d(LOGTAG,"UID for Sending");
                         }
 
                     }
                     else if(!Edittext_VID.getText().toString().isEmpty()&&Edittext_VID.getText().toString().length()==16){
-                        Toast.makeText(getApplicationContext(), "UID not Entered  or Not Correctly Entered", Toast.LENGTH_SHORT).show();
                         authReqJson = new JSONObject("{\n" +
                                 " \"vid\": \""+vidNumber+"\",\n" +
                                 " \"txnId\": \""+uuid+"\"\n" +
                                 " \"otp\": \""+Edittext_OTP.getText().toString()+"\"\n" +
                                 "}");
+                        Log.d(LOGTAG,"VID for Sending");
                     }
-                    else Toast.makeText(getApplicationContext(), "UID and not Entered  or Not Correctly Entered", Toast.LENGTH_SHORT).show();
+                    else Toast.makeText(getApplicationContext(), "UID and not Entered or Not Correctly Entered", Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -186,10 +195,10 @@ public class MainActivity extends AppCompatActivity {
                         URL_AUTH,
                         authReqJson,
                         (Response.Listener<JSONObject>) rspns ->{
-                            Log.d("resp",rspns.toString());
                             String respo= null;
                             String errcode = null;
                             try {
+                                Log.d(LOGTAG,"Response Recived as "+rspns.toString());
                                 respo = rspns.getString("status");
                                 errcode = rspns.getString("errCode");
                             } catch (JSONException e) {
@@ -202,6 +211,7 @@ public class MainActivity extends AppCompatActivity {
                                 login.putExtra("VID",Long.toString(vidNumber));
                                 login.putExtra("OTP",Edittext_OTP.getText().toString());
                                 startActivity(login);
+                                Log.d(LOGTAG,"Intent Send for Next Activity");
                             }
                         },
                         (Response.ErrorListener) error ->

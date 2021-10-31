@@ -1,7 +1,5 @@
 package uidai.hackathon.Address;
 
-import android.content.Intent;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -13,7 +11,6 @@ public class CONST_Variables {
     public static long uidNumber;
     public static long vidNumber;
     public static String uuid;
-    public static String OTP;
     public static String TXNID;
     public static String txnId;
     public static final String URL_OTP = "https://stage1.uidai.gov.in/onlineekyc/getOtp/";
@@ -22,4 +19,5 @@ public class CONST_Variables {
     public static String FbToken;
     public static String Token;
     public static String Token1;
+    public static String LOGTAG  = "Hackathon Audit";
 }
