@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "997618147461",
+    "firebase_url": "https://team-appps-uidai-default-rtdb.firebaseio.com",
+    "project_id": "team-appps-uidai",
+    "storage_bucket": "team-appps-uidai.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:997618147461:android:ffe765adbbe19ac6a1c9ec",
+        "android_client_info": {
+          "package_name": "uidai.hackathon.Address"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "997618147461-3mdqphjvfelp9o2bnlj45k2cd2v4g1g8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uidai.hackathon.Address",
+            "certificate_hash": "0bd8145526ed22b163397f94a1e80a637988da4b"
+          }
+        },
+        {
+          "client_id": "997618147461-kvs7ekqs06lk0q40iqlrrh7e7nmkme5u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdke6knabBDqr2GTKycWhLUwUo64U0JaY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "997618147461-kvs7ekqs06lk0q40iqlrrh7e7nmkme5u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
